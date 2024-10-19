@@ -57,13 +57,22 @@ public class AnimalController {
 
     @PostMapping("/{id}")
     public String update(@ModelAttribute Animal animal, @PathVariable int id) {
-        _animalDAO.update(id, animal);
+        int index = id-1;
+        if (index >= 0) {
+            _animalDAO.update(index, animal);
+            return "redirect:/animal";
+        }
         return "redirect:/animal";
     }
 
     @DeleteMapping("/{id}")
     public String delete(@PathVariable int id) {
-        _animalDAO.delete(id);
+        int index = id-1;
+        System.out.println(index);
+        if (index >= 0) {
+            _animalDAO.delete(index);
+            return "redirect:/animal";
+        }
         return "redirect:/animal";
     }
 }

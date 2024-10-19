@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Все животные</title>
+    <title>Все пиццы</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         .table-container {
@@ -63,32 +63,32 @@
 
 <div class="container mt-5">
     <div class="table-container">
-        <h1 class="mb-4 text-center">Все животные</h1>
+        <h1 class="mb-4 text-center">Все пиццы</h1>
         <table class="table table-hover">
             <thead class="table-dark">
             <tr>
                 <th>ID</th>
                 <th>Название</th>
-                <th>Тип</th>
-                <th>Количество</th>
+                <th>Цена</th>
+                <th>Размер</th>
                 <th>Действия</th>
             </tr>
             </thead>
             <tbody>
-            <tr th:each="animal : ${animals}">
-                <td th:text="${animal.id}"></td>
-                <td th:text="${animal.name}"></td>
-                <td th:text="${animal.type}"></td>
-                <td th:text="${animal.amount}"></td>
+            <tr th:each="pizza : ${pizzas}">
+                <td th:text="${pizza.id}"></td>
+                <td th:text="${pizza.name}"></td>
+                <td th:text="${pizza.price}"></td>
+                <td th:text="${pizza.size}"></td>
                 <td class="action-buttons">
                     <!-- Кнопка редактирования -->
-                    <a th:href="@{/animal/edit/{id}(id=${animal.id})}" class="btn btn-edit">Редактировать</a>
+                    <a th:href="@{/pizza/edit/{id}(id=${pizza.id})}" class="btn btn-edit">Редактировать</a>
 
                     <!-- Кнопка детальной информации -->
-                    <a th:href="@{/animal/{id}(id=${animal.id})}" class="btn btn-details">Подробнее</a>
+                    <a th:href="@{/pizza/{id}(id=${pizza.id})}" class="btn btn-details">Подробнее</a>
 
                     <!-- Кнопка удаления -->
-                    <form th:method="delete" th:action="@{'/animal/' + ${animal.id}}" style="display:inline;">
+                    <form th:method="delete" th:action="@{'/pizza/' + ${pizza.id}}" style="display:inline;">
                         <button type="submit" class="btn btn-delete">Удалить</button>
                     </form>
                 </td>
@@ -97,7 +97,7 @@
         </table>
 
         <div class="text-center mt-4">
-            <a href="/animal/create" class="btn btn-create">Добавить животное</a>
+            <a href="/pizza/create" class="btn btn-create">Добавить пиццу</a>
         </div>
     </div>
 </div>

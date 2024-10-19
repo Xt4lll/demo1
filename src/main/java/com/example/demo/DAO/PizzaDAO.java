@@ -1,19 +1,16 @@
 package com.example.demo.DAO;
 
-import com.example.demo.model.Animal;
 import com.example.demo.model.Counrty;
+import com.example.demo.model.Pizza;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Component
-public class AnimalDAO extends GenericDAO<Animal> {
+public class PizzaDAO extends GenericDAO<Pizza> {
 
     private static int OBJECT_COUNT = 0;
 
     @Override
-    public void save(Animal obj) {
+    public void save(Pizza obj) {
         if (obj.getId() == 0) {
             obj.setId(++OBJECT_COUNT);
         }

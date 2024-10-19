@@ -29,7 +29,7 @@ public class GenericDAO<T extends Identifieble> implements IGenericDAO<T>{
         return entities.stream()
                 .filter(entity -> ((T) entity).getId() == id)
                 .findFirst()
-                .orElse(null); // Возвращаем null, если животное не найдено
+                .orElse(null);
     }
 
     @Override

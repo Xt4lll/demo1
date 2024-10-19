@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Детали животного</title>
+    <title>Детали пиццы</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
@@ -41,14 +41,14 @@
 
 <div class="container">
     <div class="animal-details-container">
-        <h1 class="animal-title">Детали животного</h1>
+        <h1 class="animal-title">Детали пиццы</h1>
         <div class="animal-info">
-            <p><strong>ID:</strong> <span th:text="${animal.getId()}"></span></p>
-            <p><strong>Название:</strong> <span th:text="${animal.getName()}"></span></p>
-            <p><strong>Тип:</strong> <span th:text="${animal.getType()}"></span></p>
-            <p><strong>Количество:</strong> <span th:text="${animal.getAmount()}"></span></p>
+            <p><strong>ID:</strong> <span th:text="${pizza.getId()}"></span></p>
+            <p><strong>Название:</strong> <span th:text="${pizza.getName()}"></span></p>
+            <p><strong>Цена:</strong> <span th:text="${pizza.getPrice()}"></span></p>
+            <p><strong>Размер:</strong> <span th:text="${pizza.getSize()}"></span></p>
         </div>
-        <a href="/animal" class="btn btn-back mt-4">Назад</a>
+        <a href="/pizza" class="btn btn-back mt-4">Назад</a> <!-- Кнопка "Назад" работает -->
     </div>
 </div>
 

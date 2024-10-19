@@ -1,16 +1,62 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ЭПИЧЕСКАЯ СТРАНИЦА</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: url('https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzNjUyOXwwfDF8c2VhcmNofDEwfHxzdGFyJTIwcGFyYWRpc2V8ZW58MHx8fHwxNjg4NTY5MzY5&ixlib=rb-4.0.3&q=80&w=1080') no-repeat center center fixed;
+            background-size: cover;
+            color: white;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            text-align: center;
+            padding: 100px;
+        }
+        h1 {
+            font-size: 5rem;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+            animation: glowing 1.5s infinite alternate;
+        }
+        @keyframes glowing {
+            0% { text-shadow: 0 0 5px #ffffff, 0 0 10px #ffffff, 0 0 15px #ff00ff, 0 0 20px #ff00ff, 0 0 30px #ff00ff; }
+            100% { text-shadow: 0 0 10px #ffffff, 0 0 20px #ff00ff, 0 0 30px #ff00ff, 0 0 40px #ff00ff; }
+        }
+        p {
+            font-size: 1.5rem;
+            margin-bottom: 50px;
+            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.7);
+        }
+        a {
+            display: inline-block;
+            margin: 15px;
+            padding: 20px 40px;
+            font-size: 1.5rem;
+            text-decoration: none;
+            background-color: rgba(255, 0, 128, 0.8);
+            border-radius: 30px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 20px rgba(255, 0, 128, 0.5);
+        }
+        a:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 30px rgba(255, 0, 128, 0.8);
+        }
+    </style>
 </head>
 <body>
 
-<a href="/animal">animals</a>
-<a href="#">people</a>
-<a href="#">pizza</a>
-<a href="#">countries</a>
-<a href="#">games</a>
+<h1>ЭПИЧЕСКАЯ СТРАНИЦА!</h1>
+<p>Тут начинается магия, которую вы не забудете!</p>
 
+<a href="/animal">Животные</a>
+<a href="/people">Люди</a>
+<a href="/pizza">Пицца</a>
+<a href="/countries">Страны</a>
+<a href="/games">Игры</a>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
