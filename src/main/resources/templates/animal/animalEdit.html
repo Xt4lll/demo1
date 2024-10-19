@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<form th:action="@{/animal}" method="post">
+    <input type="text" name="name" th:value="${animal.name}" required/>
+    <input type="text" name="type" th:value="${animal.type}" required/>
+    <input type="number" name="amount" step="1" th:value="${animal.amount}" required/>
+    <button type="submit">Submit</button>
+</form>
+<a href="/animal">back</a>
+
+</body>
+</html>

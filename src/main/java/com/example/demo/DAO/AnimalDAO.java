@@ -7,25 +7,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class AnimalDAO {
+public class AnimalDAO extends GenericDAO<Animal> {
 
-    private static int ANIMAL_COUNT;
+    private static int ANIMAL_COUNT = 0;
 
-    private List<Animal> animals;
-    {
-        animals = new ArrayList<Animal>();
-
-        animals.add(new Animal(++ANIMAL_COUNT, "бобэр"));
-        animals.add(new Animal(++ANIMAL_COUNT, "даун"));
-        animals.add(new Animal(++ANIMAL_COUNT, "говно"));
-    }
-
-    public List<Animal> index() {
-        return animals;
-    }
-
-    public Animal show(int id) {
-        return animals.stream().filter(animal -> animal.getId() == id).findAny().orElse(null);
+    @Override
+    public void save(Animal animal) {
+        if (animal.getId() == 0) {
+            animal.setId(++ANIMAL_COUNT);
+        }
+        entities.add(animal);
     }
 
 }

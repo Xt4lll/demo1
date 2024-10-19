@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Все животные</title>
+</head>
+<body>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Название</th>
+        <th>Тип</th>
+        <th>Количество</th>
+        <th>Действия</th>
+    </tr>
+    <tr th:each="animal : ${animals}">
+        <td th:text="${animal.id}"></td>
+        <td th:text="${animal.name}"></td>
+        <td th:text="${animal.type}"></td>
+        <td th:text="${animal.amount}"></td>
+        <td>
+            <a th:href="@{/animal/edit/{id}(id=${animal.id})}">Edit</a>
+            <form th:method="delete" th:action="@{/animal/delete/{id}(id=${animal.id})}">
+                <input type="hidden" name="_method" value="delete">
+                <input type="submit" value="Удалить" class="btn-delete">
+            </form>
+            <a th:href="@{/animal/{id}(id=${animal.id})}">View Details</a>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

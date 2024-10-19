@@ -1,12 +1,13 @@
 package com.example.demo.controller;
 
 import com.example.demo.DAO.AnimalDAO;
+import com.example.demo.model.Animal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/animal")
@@ -15,17 +16,54 @@ public class AnimalController {
     private AnimalDAO _animalDAO;
 
     @Autowired
-    public AnimalController(AnimalDAO animalDAO) { _animalDAO = animalDAO; }
+    public AnimalController(AnimalDAO animalDAO) {
+        _animalDAO = animalDAO;
+    }
 
     @GetMapping()
-    public String index(Model model) {
-        model.addAttribute("animal", _animalDAO.index());
-        return "animal/index";
+    public String list(Model model) {
+        List<Animal> animals = _animalDAO.findAll();
+        model.addAttribute("animals", animals);
+        return "animal/animalList";
     }
 
     @GetMapping("/{id}")
     public String show(Model model, @PathVariable int id) {
-        model.addAttribute("animal", _animalDAO.show(id));
-        return "animal/show";
+        Animal animal = _animalDAO.findById(id);
+        model.addAttribute("animal", animal);
+        return "animal/animalDetail";
+    }
+
+    @GetMapping("/create")
+    public String createForm(Model model) {
+        return "animal/animalAdd";
+    }
+
+    @PostMapping
+    public String create(@ModelAttribute Animal animal) {
+        _animalDAO.save(animal);
+        return "redirect:/animal";
+    }
+
+    @GetMapping("/edit/{id}")
+    public String editForm(Model model, @PathVariable int id) {
+        Animal animal = _animalDAO.findById(id);
+        if (animal == null) {
+            return "redirect:/animal";
+        }
+        model.addAttribute("animal", animal);
+        return "animal/animalEdit";
+    }
+
+    @PostMapping("/{id}")
+    public String update(@ModelAttribute Animal animal, @PathVariable int id) {
+        _animalDAO.update(id, animal);
+        return "redirect:/animal";
+    }
+
+    @DeleteMapping("/{id}")
+    public String delete(@PathVariable int id) {
+        _animalDAO.delete(id);
+        return "redirect:/animal";
     }
 }

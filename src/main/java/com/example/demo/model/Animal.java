@@ -1,18 +1,26 @@
 package com.example.demo.model;
 
-public class Animal {
+import java.io.Serializable;
+
+public class Animal implements Identifieble {
 
     public int id;
 
     public String name;
 
+    public String type;
+
+    public int amount;
+
     public Animal() {
 
     }
 
-    public Animal(int id, String name) {
+    public Animal(int id, String name, String type, int amount) {
         this.id = id;
         this.name = name;
+        this.type = type;
+        this.amount = amount;
     }
 
     public int getId() {
@@ -31,4 +39,19 @@ public class Animal {
         this.name = name;
     }
 
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public int getAmount() {
+        return amount;
+    }
+
+    public void setAmount(int amount) {
+        this.amount = amount;
+    }
 }
