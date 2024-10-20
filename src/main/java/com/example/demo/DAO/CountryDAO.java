@@ -1,16 +1,15 @@
 package com.example.demo.DAO;
 
-import com.example.demo.model.Animal;
-import com.example.demo.model.Counrty;
+import com.example.demo.model.Country;
 import org.springframework.stereotype.Component;
 
 @Component
-public class CountryDAO extends GenericDAO<Counrty> {
+public class CountryDAO extends GenericDAO<Country> {
 
     private static int OBJECT_COUNT = 0;
 
     @Override
-    public void save(Counrty obj) {
+    public void save(Country obj) {
         if (obj.getId() == 0) {
             obj.setId(++OBJECT_COUNT);
         }

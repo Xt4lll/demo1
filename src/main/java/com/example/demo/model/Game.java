@@ -2,6 +2,7 @@ package com.example.demo.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name="Game")
@@ -17,7 +18,7 @@ public class Game implements Identifieble{
     @NotBlank(message = "Field is required")
     public String description;
 
-    @NotBlank(message = "Field is required")
+    @NotNull(message = "Field is required")
     public int online;
 
     public Game() {

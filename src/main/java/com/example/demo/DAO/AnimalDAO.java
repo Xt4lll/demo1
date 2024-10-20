@@ -1,11 +1,7 @@
 package com.example.demo.DAO;
 
 import com.example.demo.model.Animal;
-import com.example.demo.model.Counrty;
 import org.springframework.stereotype.Component;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Component
 public class AnimalDAO extends GenericDAO<Animal> {

@@ -2,10 +2,11 @@ package com.example.demo.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name="Country")
-public class Counrty implements Identifieble{
+public class Country implements Identifieble{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,13 +18,13 @@ public class Counrty implements Identifieble{
     @NotBlank(message = "Field is required")
     public String code;
 
-    @NotBlank(message = "Field is required")
+    @NotNull(message = "Field is required")
     public int population;
 
-    public Counrty() {
+    public Country() {
     }
 
-    public Counrty(int id, String name, String code, int population) {
+    public Country(int id, String name, String code, int population) {
         this.id = id;
         this.name = name;
         this.code = code;

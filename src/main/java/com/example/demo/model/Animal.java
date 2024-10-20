@@ -1,9 +1,9 @@
 package com.example.demo.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
-
-import java.io.Serializable;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name="Animal")
@@ -19,7 +19,7 @@ public class Animal implements Identifieble {
     @NotBlank(message = "Field is required")
     public String type;
 
-    @NotBlank(message = "Field is required")
+    @NotNull(message = "Field is required")
     public int amount;
 
     public Animal() {}
