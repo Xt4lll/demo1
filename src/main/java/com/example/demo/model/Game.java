@@ -1,10 +1,23 @@
 package com.example.demo.model;
 
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+
+@Entity
+@Table(name="Game")
 public class Game implements Identifieble{
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public int id;
+
+    @NotBlank(message = "Field is required")
     public String name;
+
+    @NotBlank(message = "Field is required")
     public String description;
+
+    @NotBlank(message = "Field is required")
     public int online;
 
     public Game() {
