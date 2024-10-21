@@ -72,6 +72,42 @@
       </div>
     </form>
 
+    <table class="table table-hover">
+      <thead class="table-dark">
+      <tr>
+        <th>ID</th>
+        <th>Название</th>
+        <th>Тип</th>
+        <th>Количество</th>
+        <th>Действия</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="team : ${teams}">
+        <td th:text="${team.id}"></td>
+        <td th:text="${team.name}"></td>
+        <td th:text="${team.coach.name}"></td>
+        <td th:text="${team.players}"></td>
+        <td th:text="${team.sponsors}"></td>
+        <td class="action-buttons">
+          <!-- Кнопка редактирования -->
+          <a th:href="@{/teams/edit/{id}(id=${team.id})}" class="btn btn-edit">Редактировать</a>
+
+          <!-- Кнопка детальной информации -->
+          <a th:href="@{/teams/{id}(id=${team.id})}" class="btn btn-details">Подробнее</a>
+
+          <!-- Кнопка удаления -->
+          <form th:method="delete" th:action="@{'/teams/' + ${team.id}}" style="display:inline;">
+            <button type="submit" class="btn btn-delete">Удалить</button>
+          </form>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+
+    <div class="text-center mt-4">
+      <a href="/teams/create" class="btn btn-create">Добавить команду</a>
+    </div>
   </div>
 </div>
 
