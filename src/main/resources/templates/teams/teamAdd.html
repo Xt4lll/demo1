@@ -41,18 +41,18 @@
     <div class="form-container mx-auto col-md-6">
         <h1 class="mb-4 text-center">Добавить команду</h1>
         <form action="/teams" method="post" class="row g-3">
+            <input type="text" name="name" class="form-control" placeholder="Введите название" required>
             <div class="col-md-12">
-<!--                <input type="text" name="name" class="form-control" placeholder="Введите название" required>-->
                 <select id="coach" name="coach.id" class="form-control" required>
                     <option th:each="coach : ${coaches}" th:value="${coach.id}" th:text="${coach.name}"></option>
                 </select>
             </div>
-            <div class="col-md-12">
-<!--                <input type="text" name="type" class="form-control" placeholder="Введите тип" required>-->
-                <select id="player" name="player.id" class="form-control" multiple>
-                    <option th:each="player : ${players}" th:value="${player.id}" th:text="${player.name}"></option>
-                </select>
-            </div>
+<!--            <div class="col-md-12">-->
+<!--&lt;!&ndash;                <input type="text" name="type" class="form-control" placeholder="Введите тип" required>&ndash;&gt;-->
+<!--                <select id="player" name="player.id" class="form-control" multiple>-->
+<!--                    <option th:each="player : ${players}" th:value="${player.id}" th:text="${player.name}"></option>-->
+<!--                </select>-->
+<!--            </div>-->
             <div class="col-md-12">
 <!--                <input type="number" name="amount" class="form-control" placeholder="Количество" step="1" required>-->
                 <select id="sponsor" name="sponsor.id" class="form-control" multiple>

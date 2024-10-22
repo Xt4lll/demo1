@@ -18,7 +18,7 @@ public class Team implements Identifieble{
     @JoinColumn(name = "coach_id", referencedColumnName = "id")
     private Coach coach;
 
-    @OneToMany(mappedBy = "team", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "team", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Player> players;
 
     @ManyToMany
@@ -31,10 +31,9 @@ public class Team implements Identifieble{
 
     public Team() {}
 
-    public Team(String name, Coach coach, List<Player> players, Set<Sponsor> sponsors) {
+    public Team(String name, Coach coach, Set<Sponsor> sponsors) {
         this.name = name;
         this.coach = coach;
-        this.players = players;
         this.sponsors = sponsors;
     }
 
