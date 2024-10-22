@@ -9,13 +9,14 @@ import java.util.Set;
 @Table(name = "teams")
 public class Team implements Identifieble{
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
     private String name;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "coach_id", referencedColumnName = "id")
+    @OneToOne(optional = true, cascade = CascadeType.MERGE)
+    @JoinColumn(name = "coach_id")
+//    @JoinColumn(name = "coach_id", referencedColumnName = "id")
     private Coach coach;
 
     @OneToMany(mappedBy = "team", cascade = CascadeType.ALL, orphanRemoval = true)

@@ -12,7 +12,7 @@ public class Coach implements Identifieble{
     private String name;
     private String experience;
 
-    @OneToOne(mappedBy = "coach")
+    @OneToOne(optional = true, mappedBy = "coach")
     private Team team;
 
     public Coach() {}
