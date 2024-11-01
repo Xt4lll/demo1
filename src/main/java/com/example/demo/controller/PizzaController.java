@@ -2,35 +2,44 @@ package com.example.demo.controller;
 
 import com.example.demo.DAO.PizzaDAO;
 import com.example.demo.model.Pizza;
+import com.example.demo.repositories.PizzaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/pizza")
 public class PizzaController {
 
-    private PizzaDAO _pizzaDAO;
+    private PizzaRepository _pizzaRepository;
 
     @Autowired
-    public void setPizzaDAO(PizzaDAO pizzaDAO) {
-        this._pizzaDAO = pizzaDAO;
+    public void setPizzaDAO(PizzaRepository pizzaRepository) {
+        this._pizzaRepository = pizzaRepository;
     }
 
     @GetMapping()
     public String list(Model model) {
-        List<Pizza> pizzas = _pizzaDAO.findAll();
+        List<Pizza> pizzas = _pizzaRepository.findAll();
+        model.addAttribute("pizzas", pizzas);
+        return "pizza/pizzaList";
+    }
+
+    @GetMapping("/search")
+    public String findByName(Model model, @RequestParam("keyword") String keyword) {
+        List<Pizza> pizzas = _pizzaRepository.findByNameContaining(keyword);
         model.addAttribute("pizzas", pizzas);
         return "pizza/pizzaList";
     }
 
     @GetMapping("/{id}")
     public String show(@PathVariable int id, Model model) {
-        Pizza pizza = _pizzaDAO.findById(id);
-        model.addAttribute("pizza", pizza);
+        Optional<Pizza> pizza = _pizzaRepository.findById(id);
+        model.addAttribute("pizza", pizza.get());
         return "pizza/pizzaDetail";
     }
 
@@ -41,25 +50,25 @@ public class PizzaController {
 
     @PostMapping
     public String create(@ModelAttribute Pizza pizza) {
-        _pizzaDAO.save(pizza);
+        _pizzaRepository.save(pizza);
         return "redirect:/pizza";
     }
 
     @GetMapping("/edit/{id}")
     public String edit(@PathVariable int id, Model model) {
-        Pizza pizza = _pizzaDAO.findById(id);
+        Optional<Pizza> pizza = _pizzaRepository.findById(id);
         if (pizza == null) {
             return "redirect:/pizza";
         }
-        model.addAttribute("pizza", pizza);
+        model.addAttribute("pizza", pizza.get());
         return "pizza/pizzaEdit";
     }
 
     @PostMapping("/{id}")
     public String update(@PathVariable int id, @ModelAttribute Pizza pizza) {
-        int index = id-1;
-        if(index >= 0){
-            _pizzaDAO.update(index, pizza);
+        if(id >= 0){
+            pizza.setId(id);
+            _pizzaRepository.save(pizza);
             return "redirect:/pizza";
         }
         return "redirect:/pizza";
@@ -67,9 +76,8 @@ public class PizzaController {
 
     @DeleteMapping("/{id}")
     public String delete(@PathVariable int id) {
-        int index = id-1;
-        if(index >= 0){
-            _pizzaDAO.delete(index);
+        if(id >= 0){
+            _pizzaRepository.deleteById(id);
             return "redirect:/pizza";
         }
         return "redirect:/pizza";

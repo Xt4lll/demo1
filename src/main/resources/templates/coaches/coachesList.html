@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Все игры</title>
+    <title>Все тренеры</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         .table-container {
@@ -63,9 +63,9 @@
 
 <div class="container mt-5">
     <div class="table-container">
-        <h1 class="mb-4 text-center">Все игры</h1>
+        <h1 class="mb-4 text-center">Все животные</h1>
 
-        <form action="/games/search" method="get" class="mb-4">
+        <form action="/coaches/search" method="get" class="mb-4">
             <div class="input-group">
                 <input type="text" class="form-control" name="keyword" placeholder="Поиск по имени" required>
                 <button class="btn btn-outline-secondary" type="submit">Поиск</button>
@@ -76,27 +76,25 @@
             <thead class="table-dark">
             <tr>
                 <th>ID</th>
-                <th>Название</th>
-                <th>Описание</th>
-                <th>Онлайн</th>
+                <th>Имя</th>
+                <th>Опыт</th>
                 <th>Действия</th>
             </tr>
             </thead>
             <tbody>
-            <tr th:each="game : ${games}">
-                <td th:text="${game.id}"></td>
-                <td th:text="${game.name}"></td>
-                <td th:text="${game.description}"></td>
-                <td th:text="${game.online}"></td>
+            <tr th:each="coach : ${coaches}">
+                <td th:text="${coach.id}"></td>
+                <td th:text="${coach.name}"></td>
+                <td th:text="${coach.experience}"></td>
                 <td class="action-buttons">
                     <!-- Кнопка редактирования -->
-                    <a th:href="@{/games/edit/{id}(id=${game.id})}" class="btn btn-edit">Редактировать</a>
+                    <a th:href="@{/coaches/edit/{id}(id=${coach.id})}" class="btn btn-edit">Редактировать</a>
 
                     <!-- Кнопка детальной информации -->
-                    <a th:href="@{/games/{id}(id=${game.id})}" class="btn btn-details">Подробнее</a>
+                    <a th:href="@{/coaches/{id}(id=${coach.id})}" class="btn btn-details">Подробнее</a>
 
                     <!-- Кнопка удаления -->
-                    <form th:method="delete" th:action="@{'/games/' + ${game.id}}" style="display:inline;">
+                    <form th:method="delete" th:action="@{'/coaches/' + ${coach.id}}" style="display:inline;">
                         <button type="submit" class="btn btn-delete">Удалить</button>
                     </form>
                 </td>
@@ -105,7 +103,7 @@
         </table>
 
         <div class="text-center mt-4">
-            <a href="/games/create" class="btn btn-create">Добавить пиццу</a>
+            <a href="/coaches/create" class="btn btn-create">Добавить тренера</a>
         </div>
     </div>
 </div>

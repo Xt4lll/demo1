@@ -1,6 +1,5 @@
 package com.example.demo.DAO;
 
-import com.example.demo.model.Counrty;
 import com.example.demo.model.Pizza;
 import org.springframework.stereotype.Component;
 

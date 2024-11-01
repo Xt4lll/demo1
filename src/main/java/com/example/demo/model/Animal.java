@@ -1,20 +1,29 @@
 package com.example.demo.model;
 
-import java.io.Serializable;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
+@Entity
+@Table(name="Animal")
 public class Animal implements Identifieble {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public int id;
 
+    @NotBlank(message = "Field is required")
     public String name;
 
+    @NotBlank(message = "Field is required")
     public String type;
 
+    @NotNull(message = "Field is required")
+    @Min(0)
     public int amount;
 
-    public Animal() {
-
-    }
+    public Animal() {}
 
     public Animal(int id, String name, String type, int amount) {
         this.id = id;

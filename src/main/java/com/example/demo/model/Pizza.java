@@ -1,11 +1,27 @@
 package com.example.demo.model;
 
+import jakarta.persistence.*;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
+@Entity
+@Table(name="Pizza")
 public class Pizza implements Identifieble{
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public int id;
+
+    @NotBlank(message = "Field is required")
     public String name;
+
+    @NotNull(message = "Field is required")
+    @Min(0)
     public int price;
+
+    @NotNull(message = "Field is required")
+    @Min(0)
     public int size;
 
     public Pizza() {

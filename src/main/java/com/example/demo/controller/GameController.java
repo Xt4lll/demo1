@@ -2,35 +2,44 @@ package com.example.demo.controller;
 
 import com.example.demo.DAO.GameDAO;
 import com.example.demo.model.Game;
+import com.example.demo.repositories.GameRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/games")
 public class GameController {
 
-    private GameDAO _gameDAO;
+    private GameRepository _gameRepository;
 
     @Autowired
-    public GameController(GameDAO gameDAO) {
-        _gameDAO = gameDAO;
+    public GameController(GameRepository gameRepository) {
+        _gameRepository = gameRepository;
     }
 
     @GetMapping()
     public String list(Model model) {
-        List<Game> games = _gameDAO.findAll();
+        List<Game> games = _gameRepository.findAll();
+        model.addAttribute("games", games);
+        return "games/gameList";
+    }
+
+    @GetMapping("/search")
+    public String list(Model model, @RequestParam("keyword") String keyword) {
+        List<Game> games = _gameRepository.findByNameContaining(keyword);
         model.addAttribute("games", games);
         return "games/gameList";
     }
 
     @GetMapping("/{id}")
     public String show(@PathVariable int id, Model model) {
-        Game game = _gameDAO.findById(id);
-        model.addAttribute("game", game);
+        Optional<Game> game = _gameRepository.findById(id);
+        model.addAttribute("game", game.get());
         return "games/gameDetail";
     }
 
@@ -41,25 +50,25 @@ public class GameController {
 
     @PostMapping
     public String create(Game game) {
-        _gameDAO.save(game);
+        _gameRepository.save(game);
         return "redirect:/games";
     }
 
     @GetMapping("/edit/{id}")
     public String editForm(@PathVariable int id, Model model) {
-        Game game = _gameDAO.findById(id);
+        Optional<Game> game = _gameRepository.findById(id);
         if(game == null){
             return "redirect:/games";
         }
-        model.addAttribute("game", game);
+        model.addAttribute("game", game.get());
         return "games/gameEdit";
     }
 
     @PostMapping("/{id}")
     public String update(@PathVariable int id, Game game) {
-        int index = id-1;
-        if(index >= 0){
-            _gameDAO.update(index, game);
+        if(id >= 0){
+            game.setId(id);
+            _gameRepository.save(game);
             return "redirect:/games";
         }
         return "redirect:/games";
@@ -67,9 +76,8 @@ public class GameController {
 
     @DeleteMapping("/{id}")
     public String delete(@PathVariable int id) {
-        int index = id-1;
-        if(index >= 0){
-            _gameDAO.delete(index);
+        if(id >= 0){
+            _gameRepository.deleteById(id);
             return "redirect:/games";
         }
         return "redirect:/games";
