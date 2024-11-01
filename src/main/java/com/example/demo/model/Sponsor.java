@@ -2,10 +2,11 @@ package com.example.demo.model;
 
 import jakarta.persistence.*;
 
+import java.util.List;
 import java.util.Set;
 
 @Entity
-@Table(name = "sponsonrs")
+@Table(name = "sponsors")
 public class Sponsor implements Identifieble{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -14,8 +15,13 @@ public class Sponsor implements Identifieble{
     private String name;
     private String industry;
 
-    @ManyToMany(mappedBy = "sponsors")
-    private Set<Team> teams;
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "team_sponsors",
+            joinColumns = @JoinColumn(name="sponsor_id"),
+            inverseJoinColumns = @JoinColumn(name = "team_id")
+    )
+    private List<Team> teams;
 
     public Sponsor() {}
 
@@ -48,11 +54,11 @@ public class Sponsor implements Identifieble{
         this.industry = industry;
     }
 
-    public Set<Team> getTeams() {
+    public List<Team> getTeams() {
         return teams;
     }
 
-    public void setTeams(Set<Team> teams) {
+    public void setTeams(List<Team> teams) {
         this.teams = teams;
     }
 }

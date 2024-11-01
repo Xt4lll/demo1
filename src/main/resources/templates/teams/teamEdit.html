@@ -51,7 +51,7 @@
             <!--            </div>-->
             <div class="col-md-12">
                 <!--                <input type="number" name="amount" class="form-control" placeholder="Количество" step="1" required>-->
-                <select id="sponsor" name="sponsor.id" class="form-control" multiple>
+                <select id="sponsor" name="sponsorIds" class="form-control" multiple>
                     <option th:each="sponsor : ${sponsors}" th:value="${sponsor.id}" th:text="${sponsor.name}"></option>
                 </select>
             </div>

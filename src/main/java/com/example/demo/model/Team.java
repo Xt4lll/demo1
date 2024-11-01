@@ -2,6 +2,7 @@ package com.example.demo.model;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -14,25 +15,24 @@ public class Team implements Identifieble{
 
     private String name;
 
-    @OneToOne(optional = true, cascade = CascadeType.MERGE)
+    @OneToOne(optional = true, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "coach_id")
-//    @JoinColumn(name = "coach_id", referencedColumnName = "id")
     private Coach coach;
 
     @OneToMany(mappedBy = "team", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Player> players;
+    private List<Player> players = new ArrayList<>();
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name = "team_sponsors",
             joinColumns = @JoinColumn(name = "team_id"),
             inverseJoinColumns = @JoinColumn(name = "sponsor_id")
     )
-    private Set<Sponsor> sponsors;
+    private List<Sponsor> sponsors = new ArrayList<>();
 
     public Team() {}
 
-    public Team(String name, Coach coach, Set<Sponsor> sponsors) {
+    public Team(String name, Coach coach, List<Sponsor> sponsors) {
         this.name = name;
         this.coach = coach;
         this.sponsors = sponsors;
@@ -67,14 +67,20 @@ public class Team implements Identifieble{
     }
 
     public void setPlayers(List<Player> players) {
-        this.players = players;
+        this.players.clear();
+        if (players != null) {
+            for (Player player : players) {
+                player.setTeam(this); // Устанавливаем команду для каждого игрока
+                this.players.add(player);
+            }
+        }
     }
 
-    public Set<Sponsor> getSponsors() {
+    public List<Sponsor> getSponsors() {
         return sponsors;
     }
 
-    public void setSponsors(Set<Sponsor> sponsors) {
+    public void setSponsors(List<Sponsor> sponsors) {
         this.sponsors = sponsors;
     }
 }

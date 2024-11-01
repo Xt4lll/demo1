@@ -88,16 +88,19 @@
         <td th:text="${team.id}"></td>
         <td th:text="${team.name}"></td>
         <td th:text="${team.coach.name}"></td>
-        <td th:text="${team.players}"></td>
-        <td th:text="${team.sponsors}"></td>
+        <td>
+          <span th:each="player : ${team.players}">
+            <span th:text="${player.name}"></span>
+          </span>
+        </td>
+        <td>
+          <span th:each="sponsor : ${team.sponsors}">
+            <span th:text="${sponsor.name}"></span>
+          </span>
+        </td>
         <td class="action-buttons">
-          <!-- Кнопка редактирования -->
           <a th:href="@{/teams/edit/{id}(id=${team.id})}" class="btn btn-edit">Редактировать</a>
-
-          <!-- Кнопка детальной информации -->
           <a th:href="@{/teams/{id}(id=${team.id})}" class="btn btn-details">Подробнее</a>
-
-          <!-- Кнопка удаления -->
           <form th:method="delete" th:action="@{'/teams/' + ${team.id}}" style="display:inline;">
             <button type="submit" class="btn btn-delete">Удалить</button>
           </form>

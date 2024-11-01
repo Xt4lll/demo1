@@ -47,7 +47,7 @@
             <p><strong>Название:</strong> <span th:text="${team.getName()}"></span></p>
             <p><strong>Тренер:</strong> <span th:text="${team.getCoach().getName()}"></span></p>
             <p><strong>Игроки:</strong> <span th:each="player : ${team.getPlayers()}"><span th:text="${player.getName()}"></span><br></span></p>
-            <p><strong>Спонсоры:</strong> <span th:each="sponsor : ${team.getSponsors()}"><span th:text="${sponsor.getName()}"><br></span></span></p>
+            <p><strong>Спонсоры:</strong> <span th:each="sponsor : ${team.getSponsors()}"><span th:text="${sponsor.getName()}"></span><br></span></p>
         </div>
         <a href="/teams" class="btn btn-back mt-4">Назад</a>
     </div>
