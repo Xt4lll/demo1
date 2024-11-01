@@ -1,6 +1,7 @@
 package com.example.demo.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
@@ -19,6 +20,7 @@ public class Person implements Identifieble {
     public String surname;
 
     @NotNull(message = "Field is required")
+    @Min(0)
     public int age;
 
     public Person() {

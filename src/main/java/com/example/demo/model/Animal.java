@@ -20,6 +20,7 @@ public class Animal implements Identifieble {
     public String type;
 
     @NotNull(message = "Field is required")
+    @Min(0)
     public int amount;
 
     public Animal() {}
